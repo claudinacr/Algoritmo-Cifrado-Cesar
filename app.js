@@ -6,30 +6,30 @@
  *
  */
 function main() {
-  let respuesta = '';
+  let result = '';
   let message = '';
     do {
     // El usuario ingresara la opcion que desee
-    respuesta = prompt(`Introduzca el número de lo que desea hacer:
+    result = prompt(`Introduzca el número de lo que desea hacer:
     1)Cifrar Mensaje - 2)Decifrar Mensaje`);
     // si la respuesta es 1, el usuario ingresa la frase a cifrar
-    if (respuesta !== '') {
-      if (respuesta === '1') {
+    if (result !== '') {
+      if (result === '1') {
         message = prompt('Ingrese el mensaje a Cifrar: ');
         // por defecto n es 33.
         if (isValid(message)) {
-          let cifrado = cipher(message, 33);
-          alert('El Mensaje Cifrado es: ' + cifrado);
+          let cipherM = cipher(message, 33);
+          alert('El Mensaje Cifrado es: ' + cipherM);
         } else {
           alert('El mensaje no es valido');
         }
 
         // si la respuesta es 2, el usuario ingresa la frase a decifrar
-      } else if (respuesta === '2') {
+      } else if (result === '2') {
         message = prompt('Ingrese un mensaje a Decifrar: ');
         if (isValid(message)) {
-          let decifrado = decipher(message, 33);
-          alert('El Mensaje Decifrado es: ' + decifrado);
+          let decipherM = decipher(message, 33);
+          alert('El Mensaje Decifrado es: ' + decipherM);
         } else {
           alert('El mensaje no es valido');
         }
@@ -40,7 +40,7 @@ function main() {
       }
     }
     // El algoritmo se ejecutara mientras estas opciones se cumplan
-  } while (respuesta === '' || (respuesta !== '1' && respuesta !== '2'));
+  } while (result === '' || (result !== '1' && result !== '2'));
 }
 
 // El usuario ingresa un mensaje para encriptar y otro para desencriptar
@@ -113,7 +113,7 @@ function decipher(message, n) {
         indDecipher = ((acchar - 65 - n + 52) % 26) + 65;
         str += String.fromCharCode(indDecipher);
       } else if (acchar > 96 && acchar < 123) { // minúsculas (a-z)
-        indDecipher = mod((acchar - 97 - n + 78) % 26) + 97;
+        indDecipher = ((acchar - 97 - n + 78) % 26) + 97;
         // (acchar - 97 - n)% 26 + 97
         str += String.fromCharCode(indDecipher);
       }
@@ -153,13 +153,20 @@ function isValid(str) {
     return true;
   } else return false; // Retorna False si el string está vacio
 }
-// Funcion para calcular el modulo
+/**
+ * @param {number} n
+ * @param {number} m
+ * @return {number}
+ *
+ * Esta funcion es crea para solventar la funcionalidad que tiene el
+ * el operador % en Javascript ya que da resultados negativos para valores
+ * negativos
+ */
 // function mod(n, m) {
 //    return ((n % m) + m) % m;
-// } /* Esta funcion es crea para solventar la funcionalidad que tiene el
-// el operador % en Javascript ya que da resultados negativos para valores
-// negativos
-// ejemplo
+// } 
+
+// ejemplo*/
 
 main();
 
